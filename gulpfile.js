@@ -1,4 +1,5 @@
 let gulp         = require('gulp'),
+    webserver = require('gulp-webserver'),
     concat       = require('gulp-concat'),
     imagemin     = require('gulp-imagemin'),
     include      = require('gulp-include'),
@@ -32,6 +33,9 @@ function notify(message) {
  */
 function config() {
   return gulp.src('src/yml/_config.yml')
+    .pipe(webserver({
+      host: "0.0.0.0"
+    }))
     .pipe(include())
     .on('error', console.error)
     .pipe(gulp.dest('./'));
