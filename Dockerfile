@@ -20,4 +20,4 @@ RUN npm install --only=production -hostname 0.0.0.0
 COPY . ./
 
 # Run the web service on container startup.
-CMD [ "node", "index.js" ]
+CMD [ "gulp" ]
