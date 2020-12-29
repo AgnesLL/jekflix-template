@@ -15,6 +15,8 @@ COPY package*.json ./
 # If you add a package-lock.json, speed your build by switching to 'npm ci'.
 # RUN npm ci --only=production
 RUN npm install --only=production -hostname 0.0.0.0
+RUN npm install -g gulp
+RUN npm install gulp
 
 # Copy local code to the container image.
 COPY . ./

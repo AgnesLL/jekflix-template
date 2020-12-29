@@ -14,6 +14,7 @@ let gulp         = require('gulp'),
     fs           = require('fs'),
     jsonSass     = require('json-sass'),
     source       = require('vinyl-source-stream');
+   //spawn = require('cross-spawn');
 
 /**
  * Notify
@@ -51,11 +52,16 @@ function config() {
 function jekyll(done) {
   notify('Building Jekyll...');
   let bundle = process.platform === "win32" ? "bundle.bat" : "bundle";
+  //let bundle = "bundle.bat";
+  console.log(bundle);
+  /*return cp.execFile(bundle, ['jekyll', 'build'], function(err, stdout, stderr) {
+    console.log(err, stdout, stderr);
+  });*/
   return cp
     .spawn(bundle, ['exec', 'jekyll build'], { stdio: 'inherit' })
     .on('close', done);
 }
-
+//bundle, ['exec', 'jekyll build'], { stdio: 'inherit' }
 /**
  * Server Task
  * 
@@ -114,7 +120,7 @@ function jsonTheme() {
 }
 
 function cleanTheme() {
-  return del(['src/tmp']);
+  return del(['src/tmp'], {force: true});
 }
 
 const theme = gulp.series(yamlTheme, jsonTheme, cleanTheme);
